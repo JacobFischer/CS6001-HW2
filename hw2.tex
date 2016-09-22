@@ -1,0 +1,135 @@
+\documentclass[letterpaper]{article}
+
+%\usepackage{amsfonts}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage[utf8]{inputenc}
+
+\title{CS 6001 Homework 2}
+\author{Michael Catanzaro, Jacob Fischer, Christian Storer}
+\date{September 22, 2016}
+
+\begin{document}
+\maketitle
+
+\section{Find an x that satisfies the following linear congruences}
+
+\begin{equation*}
+  \begin{split}
+    x &\equiv 2\ mod\ 5 \\
+	  x &\equiv 3\ mod\ 7 \\
+    x &\equiv 8\ mod\ 11
+  \end{split}
+\end{equation*}
+
+To do so, use Chinese Remainder Theorem
+
+\begin{equation*}
+  \begin{split}
+    x &\equiv a_i\ mod\ n_i \\
+    \\
+    x &= N_1*b_1*a_1 + N_2*b_2*a_2 + N_3*b_3*a_3 \\
+    \\
+    n &= 5 * 7 * 11 = 385 \\
+    \\
+    a_1 &= 2 \\
+    n_1 &= 5 \\
+    N_1 &= n/n_1 = 77 \\
+    \\
+    a_2 &= 3 \\
+    n_2 &= 7 \\ 
+    N_2 &= n/n_2 = 55 \\
+    \\
+    a_3 &= 8 \\
+    n_3 &= 11 \\
+    N_3 &= n/n_3 = 35 \\
+    \\
+    N_i*b_i &\equiv 1\ mod\ n_i \\
+    \\
+    N_1*b_1 &\equiv 1\ mod\ n_1 \\
+    77*b_1 &\equiv 1\ mod\ 5 \\
+    b_1 &\equiv 3 \\
+    \\
+    55*b_2 &\equiv 1\ mod\ 7 \\
+    b_2 &= 6 \\
+    \\
+    35*b_3 &\equiv 1\ mod\ 11 \\
+    b_3 &= 6 \\
+    \\
+    x &= 77*3*2 + 55*6*3 + 35*6*8 \\
+    x &= 3132
+  \end{split}
+\end{equation*}
+
+\section{Discuss some useful applications of the Chinese Remainder Theorem}
+
+CRT is useful for secret sharing. If you have some secret code \(x\), and you want it to be shared among \(n\) people, however you also wish that any subset of the \(n\) people cannot decipher the code \(x\) without all \(n\) people. To do this, you give each member some function \(f_i()\), which is one of congruence equations in Problem 1. To find the \(x\) that satisfies all the equations \(f()\) you must have all the \(f_i()\). Having only a subset does not spoil the secret, as they cannot calculate \(x\).
+
+\section{Under the RSA encryption scheme, suppose p = 89 and q = 113.}
+
+\textbf{Let e = 17, show how to derive the private key d.}
+
+\begin{equation*}
+  \begin{split}
+\varphi(n) &= (p -1)(q -1) \\
+& =(89 - 1)(113 - 1) = 9856 \\
+\\
+GCD(e, \varphi(n)) &= GCD(17, 9856) = 1 \\
+\\
+d*e\ mod\ \varphi(n) &= 1 \\
+d*17\ mod\ 9856 &= 1
+  \end{split}
+\end{equation*}
+
+To find \(d\) from here, we can use Euclid's algorithm
+
+\begin{equation*}
+  \begin{split}
+17*d &= 1\ (mod 9856) \\
+\\
+9856 &= 17*579 + 13 \rightarrow 13 = 9856 - 17*579 \\
+17 &= 13*1 + 4 \rightarrow 4  = 17 - 13*1 \\
+13 &= 4*3 + 1 \rightarrow 1 = 13 - 4*3 \\
+4 &= 1*4
+  \end{split}
+\end{equation*}
+
+\begin{equation*}
+  \begin{split}
+GCD(9856, 17) = 1
+  \end{split}
+\end{equation*}
+
+\begin{equation*}
+  \begin{split}
+1	&= 13 - 4*3 \\
+&= (9856 - 17*579) - (17 - 13)*3 \\
+&= 9856 - 17*579 - (17 - (9856 - 17*579))*3 \\
+&= 9856 - 17*579 - (17*3 - (9856*3 - 17*579*3)) \\
+&= 9856 - 17*579 - (17*3 - 9856*3 + 17*579*3) \\
+&= 9856 - 17*579 - 17*3 + 9856*3 - 17*579*3 \\
+&= 9856*4 - 17*2319 \\
+d &= 9856 - 2319 \\
+d &= 7537
+  \end{split}
+\end{equation*}
+
+\textbf{Given m = 65, compute the encryption of m and verify the encryption is correct by decrypting the encrypted value.}
+
+\begin{equation*}
+  \begin{split}
+E(m) &= m^e\ mod\ n \\
+\\
+n &= 89 * 113 = 10057 \\
+\\
+E(65) &= 65^17\ mod\ 10057 \\
+E(65) &= 6619 \\
+e &= 6619 \\
+\\
+D(e) &= e^d mod\ n \\
+D(e) &= 6619^7537\ mod\ 10057 \\
+D(e) &= 65
+  \end{split}
+\end{equation*}
+
+
+\end{document}
