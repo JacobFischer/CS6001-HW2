@@ -132,4 +132,62 @@ D(e) &= 65
 \end{equation*}
 
 
+\section{Show $f_a(x)=ax\mod n$ is a permutation of $Z_n^*$}
+
+Because $f_a(x):Z_n^* \mapsto Z_n^*$, $x\in Z_n^*$ must be true. By applying the closure property of multiplicative operators it is known that,
+\begin{equation*}
+x,a\in Z_n^* \implies xa \in Z_n^*
+\end{equation*}
+For $f_a(x)$ to be a permutation of $Z_n^*$, it must be a one-to-one function such that 
+\begin{equation*}
+a_ix\mod n \neq a_jx\mod n : a_i\neq a_j \text{ and }a_i,a_j\in Z_n^*
+\end{equation*}
+To prove this assume $a_ix\mod n = a_jx\mod n$
+\begin{align*}
+a_ix\mod n = a_jx\mod n &\implies a_ix+kn = a_jx+k'n:k,k' \text{ are some integer}\\
+&\implies a_ix-a_jx = n(k'-k)\\
+&\implies a_ix \equiv a_jx\mod n
+\end{align*}
+However,
+\begin{align*}
+x\in Z_n^* &\implies \gcd(x,n)=1\\
+\gcd(x,n)=1 &\implies xi \not\equiv xj\mod n: 0\leq i<j<n\\
+xi \not\equiv xj\mod n &\implies a_ix \not\equiv a_jx\mod n
+\end{align*}
+Thus $f_{a_i}(x) \neq f_{a_j}(x)$ is one-to-one and since $\forall a,x\in Z_n^*\implies ax\in Z_n^*$ it can be said that $f_a(x)$ is a permutation of $Z_n^*$.
+
+
+\section{Show that if $p$ is a prime and $e$ is a positive integer, then $\phi(p^e) = p^{e-11}(p - 1)$}
+
+Based on the definition of Euler's totient function, $\phi(p^e)$ is the number of positive integers $m\leq p^e$ such that $\gcd(m,p^e)=1$. This can also be rewritten as the $p^e$ minus the number positive integers $m\leq p^e$ such that $\gcd(m,p^e)\neq1$.
+
+Because $p^e$ is $p*p*\ldots*p$, $e$ times, only a multiple of $p$ can divide $p^e$.
+\begin{align*}
+\gcd(m,p^e) \neq 1 &\implies m= kp: k\in \mathbb{Z^+}\\
+m \leq p^e &\implies m=1p,2p,\ldots,p^{e-1}p\\
+m=1p,2p,\ldots,p^{e-1}p &\implies k=1,2,\ldots,p^{e-1}\\
+k=1,2,\ldots,p^{e-1} &\implies \exists p^{e-1}\text{ numbers($m$'s)}: \gcd(m,p^e) \neq 1\\~\\
+\therefore \phi(p^e) = p^e-p^{e-1} = p^{e-1}(p-1)
+\end{align*}
+
+
+\section{Prove that $Z_n^*$ is a group where the group operation is multiplication modulo $n$}
+For $a,b\in Z_n^*$ prove $a*b \in Z_n^*$
+\begin{align*}
+a,b\in Z_n^* &\implies \gcd(a,n)=1 \wedge \gcd(b,n) =1\\
+\gcd(a,n)=1 &\implies ap + nq = 1: p,q\in\mathbb{Z}\\
+\gcd(b,n) =1 &\implies bp' + nq' = 1: p',q'\in\mathbb{Z}
+\end{align*}
+\begin{align*}
+ap + nq &= 1\\
+1-nq &= ap \\
+&= ap(1) \\
+&= ap(bp'+nq')\\
+&= apbp'+apnq'\\
+1 &= apbp'+apnq' +nq\\
+&= abpp' + n(apq'+q)\\
+&= abp'' + nq''\\
+1 = abp'' + nq'' &\implies \gcd(ab,n)=1
+\end{align*}
+Since $\gcd(ab,n)=1$ closure exists for the multiplication operation
 \end{document}
