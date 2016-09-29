@@ -153,4 +153,18 @@ x\in Z_n^* &\implies \gcd(x,n)=1\\
 xi \not\equiv xj\mod n &\implies a_ix \not\equiv a_jx\mod n
 \end{align*}
 Thus $f_{a_i}(x) \neq f_{a_j}(x)$ is one-to-one and since $\forall a,x\in Z_n^*\implies ax\in Z_n^*$ it can be said that $f_a(x)$ is a permutation of $Z_n^*$.
+
+
+\section{Show that if $p$ is a prime and $e$ is a positive integer, then $\phi(p^e) = p^{e-11}(p - 1)$}
+Based on the definition of Euler's totient function, $\phi(p^e)$ is the number of positive integers $m\leq p^e$ such that $\gcd(m,p^e)=1$. This can also be rewritten as the $p^e$ minus the number positive integers $m\leq p^e$ such that $\gcd(m,p^e)\neq1$.
+
+Because $p^e$ is $p*p*\ldots*p$, $e$ times, only a multiple of $p$ can divide $p^e$.
+\begin{align*}
+\gcd(m,p^e) \neq 1 &\implies m= kp: k\in \mathbb{Z^+}\\
+m \leq p^e &\implies m=1p,2p,\ldots,p^{e-1}p\\
+m=1p,2p,\ldots,p^{e-1}p &\implies k=1,2,\ldots,p^{e-1}\\
+k=1,2,\ldots,p^{e-1} &\implies \exists p^{e-1}\text{ numbers($m$'s)}: \gcd(m,p^e) \neq 1\\~\\
+\therefore \phi(p^e) = p^e-p^{e-1} = p^{e-1}(p-1)
+\end{align*}
+
 \end{document}
